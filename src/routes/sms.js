@@ -32,8 +32,10 @@ routes.post('/verify', (req, res)=>{
     .services(process.env.VERIFY_SERVICE_SID)
       .verificationChecks
       .create({to: number, code})
-      .then(verification_check => console.log(verification_check.status));
-    return res.send('verify');
+      .then(verification_check => {
+          console.log(verification_check.status);
+          return res.send(verification_check.status);
+        });
 });
 
 module.exports = routes;
